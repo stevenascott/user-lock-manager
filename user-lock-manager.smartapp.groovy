@@ -1066,6 +1066,42 @@ def performActions(evt) {
     def codeData = new JsonSlurper().parseText(evt.data)
     if(enabledUsersArray().contains(codeData.usedCode) || isManualUnlock(codeData)) {
       // Global Hello Home
+
+        // This portion was added by Steven Scott. This will only work for his home.
+      	def curMode = location.currentMode
+        log.debug("Current Mode: $curMode.name")
+
+        if(curMode.name == "A:Morning") 
+        {
+            log.debug("Running morning arrival action.")
+            send("Running morning arrival action.")
+            location.helloHome.execute("Morning Arrival")
+        }
+        if(curMode.name == "A:Day") 
+        {
+            log.debug("Running day arrival action.")
+            send("Running day arrival action.")
+            location.helloHome.execute("Day Arrival")
+        }
+        if(curMode.name == "A:Evening") 
+        {
+            log.debug("Running evening arrival action.")
+            send("Running evening arrival action.")
+            location.helloHome.execute("Evening Arrival")
+        }
+        if(curMode.name == "A:Night") 
+        {
+            log.debug("Running night arrival action.")
+            send("Running night arrival action.")
+            location.helloHome.execute("Night Arrival")
+        }
+        if(curMode.name == "A:Sleep") 
+        {
+            log.debug("Running sleep arrival action.")
+            send("Running sleep arrival action.")
+            location.helloHome.execute("Sleep Arrival")
+        }      
+
       if (noRunPresence && doRunPresence == null) {
         if (!anyoneHome(noRunPresence)) {
           location.helloHome.execute(homePhrases)
